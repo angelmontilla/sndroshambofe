@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ClassRepoMove } from './classes/class-repo-move';
 import { Observable, throwError, Subscription } from 'rxjs';
 import { Clsids } from './classes/clsids';
 import { SrvstartService } from './services/srvstart.service';
@@ -156,6 +155,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.stateSelAftPlyScnd = (Math.floor(Math.random() * 3));
 
       this.PlayRound$ = this.srvplay.playGame(this.idUser, this.stateSelection, this.stateSelAftPlyScnd);
+      this.scoreObservable$ = this.srvscore.scoresPlayer(this.idUser);
+      this.totalPlayObservable$ = this.totalsSrv.acumulates();
 
       this.PlayRound$
       .pipe(take(1), catchError(this.handError))
@@ -164,27 +165,28 @@ export class AppComponent implements OnInit, OnDestroy {
         this.theFinalResult = this.theDtoResult.result.toString();
         const r = +Enumresult[this.theDtoResult.result];
         this.stateGameResult = 3 * this.stateSelAfterPlay + r;
+
+        this.scoreObservable$
+        .pipe(take(1), catchError(this.handError))
+        .subscribe(results => {
+          this.listMovements = results;
+          this.rondNbr = this.listMovements.length;
+
+          this.totalPlayObservable$
+          .pipe(take(1), catchError(this.handError))
+          .subscribe(thetotals => {
+            this.totals.totalRounds = thetotals.totalRounds;
+            this.totals.totalFirstWin = thetotals.totalFirstWin;
+            this.totals.totalSecondWin = thetotals.totalSecondWin;
+            this.totals.totalDraws = thetotals.totalDraws;
+          });
+    
+        });
+
       });
 
-      this.scoreObservable$ = this.srvscore.scoresPlayer(this.idUser);
+      
 
-      this.scoreObservable$
-      .pipe(take(1), catchError(this.handError))
-      .subscribe(results => {
-        this.listMovements = results;
-        this.rondNbr = this.listMovements.length;
-      });
-
-      this.totalPlayObservable$ 
-
-      this.totalPlayObservable$
-      .pipe(take(1), catchError(this.handError))
-      .subscribe(thetotals => {
-        this.totals.totalRounds = thetotals.totalRounds;
-        this.totals.totalFirstWin = thetotals.totalFirstWin;
-        this.totals.totalSecondWin = thetotals.totalSecondWin;
-        this.totals.totalDraws = thetotals.totalDraws;
-      });
   
       // Restore view status to original
       this.stateSelection = 3;
