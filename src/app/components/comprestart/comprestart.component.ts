@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-comprestart',
@@ -6,6 +6,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./comprestart.component.css']
 })
 export class ComprestartComponent implements OnInit {
+  @Input()
+  images: string[];
+
+  @Input()
+  status: number;
 
   @Output()
   askRestart = new EventEmitter<boolean>();
@@ -13,6 +18,13 @@ export class ComprestartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (this.images === undefined || this.images === null) {
+      this.images = [];
+    }
+
+    if (this.status === undefined) {
+      this.status = 0;
+    }    
   }
 
   restartPlayed() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-compbtnstart',
@@ -7,6 +7,13 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class CompbtnstartComponent implements OnInit {
 
+  @Input()
+  images: string[];
+
+  @Input()
+  status: number;
+
+
   @Output()
   askStart = new EventEmitter<boolean>();
 
@@ -14,6 +21,13 @@ export class CompbtnstartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (this.images === undefined || this.images === null) {
+      this.images = [];
+    }
+
+    if (this.status === undefined) {
+      this.status = 0;
+    }
   }
 
   startPlay() {

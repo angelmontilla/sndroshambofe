@@ -8,10 +8,10 @@
                     <th>Winner</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let move of results.listMoves">
+            <tbody *ngFor="let move of results async">
                 <tr>
-                    <td>{{getStringMove(move.first)}}</td>
-                    <td>{{getStringMove(move.second)}}</td>
+                    <td>{{getStringMove(move.fplayer)}}</td>
+                    <td>{{getStringMove(move.splayer)}}</td>
                     <td>{{getStringResult(move.result)}}</td>
                 </tr>
             </tbody>

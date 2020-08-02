@@ -72,7 +72,7 @@ export class CompestatistiComponent implements OnInit, OnChanges {
 
   @HostListener('window:beforeunload', [ '$event' ])
   unloadHandler(event) {
-    console.log('unloadHandler');
+    //console.log('unloadHandler');
     //this.serv.onClose();
   }
 

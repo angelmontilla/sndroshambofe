@@ -1,4 +1,7 @@
 <div (click)="startPlay()">
     <p class="text-center" style="height: 4em;">START NEW GAME<br /></p>
-    <img src="../assets/svgs/start.svg" width="50%" />
+    <img *ngIf="status==0 else elsetag" [src]="images[0]" width="50%" />
+    <ng-template #elsetag>
+        <img [src]="images[1]" class="iplay" width="50%" />
+    </ng-template>    
 </div>

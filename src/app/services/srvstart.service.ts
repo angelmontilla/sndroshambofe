@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, retry } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { Clsids } from '../classes/clsids';
 
@@ -10,52 +9,34 @@ import { Clsids } from '../classes/clsids';
 export class SrvstartService {
 
   private apiUrl: string = 'http://localhost:8080/sndroshambo/playstart';
-  httpOpt = {headers: new HttpHeaders({'Content-Type': 'application(json'})};
+  //httpOpt = {headers: new HttpHeaders({'Content-Type': 'application(json'})};
 
   /**
-   *Creates an instance of SrvstartService.
+   * Creates an instance of SrvstartService.
    * @param {HttpClient} client (Dependency Inyection)
    * @memberof SrvstartService
    */
   constructor(private client: HttpClient) { }
 
   /**
-   * @description Observable to users
+   * @description Observable to users ids
    *
    * @returns {Observable<Clsids[]>}
    * @memberof SrvstartService
    */
-  // public startGame(): Observable<Clsids[]> {
-
-  //   return this.client.get<Clsids[]>(this.apiUrl)
-  //                     .pipe(retry(3), catchError(this.handError));
-
-  // }
   public startGame(): Observable<Clsids> {
     return this.client.get<Clsids>(this.apiUrl);
   }
 
   /**
-   * @description handler of error
+   * @description Observable to users ids
    *
-   * @param {HttpErrorResponse} anError
-   * @returns {Observable<any>}
+   * @param {string} id
+   * @returns {Observable<Clsids>}
    * @memberof SrvstartService
    */
-  handError(anError: HttpErrorResponse): Observable<any> {
-    let errMsg: string = 'None';
-
-    // Yes, there is an error from client
-    if (anError.error instanceof ErrorEvent) {
-      // tell me
-      errMsg = `Error: ${anError.error.message}`;
-    } else {
-      // No, error comes from server
-      errMsg = `Server error: ${anError.status}\nMessage: ${anError.message}`;
-    }
-
-    console.log(`Has been an error -> ${errMsg}`);
-
-    return throwError(errMsg);
+  public restartGame(id: string): Observable<Clsids> {
+    return this.client.get<Clsids>(this.apiUrl + '/' + id);
   }
+
 }

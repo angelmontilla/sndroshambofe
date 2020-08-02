@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ClassRepoMove } from '../../classes/class-repo-move';
 import { Enumresult } from '../../enums/enumresult.enum';
 import { Enummove } from '../../enums/enummove.enum';
+import { ClassResult } from '../../classes/class-result';
 
 /**
  * @description Component for showing results
@@ -18,13 +19,13 @@ import { Enummove } from '../../enums/enummove.enum';
 export class ComptableComponent implements OnInit {
 
   @Input()
-  results: ClassRepoMove;
+  results: ClassResult[] = new Array();
 
   constructor() { }
 
   ngOnInit(): void {
     if (this.results === undefined) {
-      this.results = new ClassRepoMove();
+      this.results = new Array();
     }
   }
 
@@ -36,7 +37,7 @@ export class ComptableComponent implements OnInit {
    * @memberof ComptableComponent
    */
   getStringMove(a: Enummove): string {
-    return Enummove[a];
+    return a.toString();
   }
 
   /**
@@ -47,7 +48,7 @@ export class ComptableComponent implements OnInit {
    * @memberof ComptableComponent
    */
   getStringResult(a: Enumresult): string {
-    return Enumresult[a];
+    return a.toString();
   }
 
 }

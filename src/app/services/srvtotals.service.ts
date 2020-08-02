@@ -23,7 +23,7 @@ export class SrvtotalsService {
    * @memberof SrvtotalsService
    */
   constructor(private extPlace: NgZone ) {
-    this.urlKafka = 'http://localhost:8080/sndroshambo';
+    this.urlKafka = 'http://localhost:8080/sndroshambo/acumulate';
   }
 
   /**
@@ -37,7 +37,7 @@ export class SrvtotalsService {
     this.eventSrc = new EventSource(url);
     this.eventSrc.onmessage = (event) => {
 
-      console.log('got event data', event['data']);
+      //console.log('got event data', event['data']);
       const newArrays = [...this.acumDataSrc.value, JSON.parse(event['data'])];
 
       this.extPlace.run(() => {

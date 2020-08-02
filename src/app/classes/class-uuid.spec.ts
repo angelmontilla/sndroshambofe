@@ -7,7 +7,7 @@ describe('ClassUuid', () => {
 
   it ('must have 36 lenght', () => {
     const u: ClassUuid = new ClassUuid();
-    console.log(u);
+    //console.log(u);
     expect(u.UUID.length).toBe(36);
   });
 });

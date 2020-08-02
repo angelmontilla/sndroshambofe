@@ -4,15 +4,18 @@
 
     <div class="row" style="margin-top: 15px;margin-bottom: 15px;">
 
-        <app-compbtnstart (askStart)="start($event)" class="col-4 col-lg-4 col-xl-4 text-center"></app-compbtnstart>
+        <app-compbtnstart [images]="imgStart" [status]="statusStart" (askStart)="start($event)" class="col-4 col-lg-4 col-xl-4 text-center"></app-compbtnstart>
 
         <div class="col-4 col-lg-4 col-xl-4 text-center">
             <p class="text-center">STATISTICAL RESULTS<br /></p>
-            <app-compestatisti [rounds]="2000" [firsts]="250" [seconds]="1000" [draws]="750"></app-compestatisti>            
+            <app-compestatisti [rounds]="totals.totalRounds" 
+                               [firsts]="totals.totalFirstWin" 
+                               [seconds]="totals.totalSecondWin" 
+                               [draws]="totals.totalDraws"></app-compestatisti>
 
         </div>
 
-        <app-comprestart (askRestart)="clear($event)" class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 offset-0 offset-md-0 offset-lg-0 offset-xl-0 text-center"></app-comprestart>
+        <app-comprestart [images]="imgRestart" [status]="statusStart" (askRestart)="clear($event)" class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 offset-0 offset-md-0 offset-lg-0 offset-xl-0 text-center"></app-comprestart>
 
     </div>
     
