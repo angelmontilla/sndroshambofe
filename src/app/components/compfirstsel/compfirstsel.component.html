@@ -1,0 +1,8 @@
+<div class="divfirstsel">
+    <p class="text-center pfirstsel">Your <br />Choise</p>
+    
+    <img class="ifirstsel" *ngIf="image!=3 else elsetag" [src]="actualImage[image]" width="100%" />
+    <ng-template #elsetag>
+        <div class="ifirstsel"></div>
+    </ng-template>
+</div>

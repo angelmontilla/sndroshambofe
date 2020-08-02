@@ -1,0 +1,17 @@
+.divfirstsel {
+    background-color: #F8F9FA;
+}
+
+.pfirstsel {
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    height: 3em;
+    background-color: #b4b4b4;
+}
+
+.ifirstsel {
+    height: 13em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
